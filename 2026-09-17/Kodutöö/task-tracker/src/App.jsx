@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { TaskForm } from './components/TaskForm';
+
 import './App.css';
 import Header from './components/Header';
 import TaskCard from './components/TaskCard';
@@ -20,6 +22,13 @@ function App() {
     );
   }
 
+  function addTask(title) {
+    setTasks((previous) => [
+      ...previous,
+      { id: crypto.randomUUID(), title, completed: false },
+    ]);
+  }
+
   const filteredTasks = tasks.filter((task) => {
     if (filter === "completed") return task.completed;
     if (filter === "incomplete") return !task.completed;
@@ -34,6 +43,8 @@ function App() {
           <h1>Task Tracker</h1>
         </div>
 
+        <TaskForm onAddTask={addTask} />
+        
         <div>
           <button onClick={() => setFilter("all")}>All tasks</button>
           <button onClick={() => setFilter("completed")}>
