@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import './App.css';
-import Header from './components/Header'
-import TaskCard from './components/TaskCard'
+import Header from './components/Header';
+import TaskCard from './components/TaskCard';
 
 function App() {
-    const task1 = {
-      title: "Conquer Baveria",
-      completed: true,
-    };
+  const task1 = {
+    title: 'Conquer Baveria',
+    completed: true,
+  };
 
-    const task2 = {
-      title: "Lay siege to Brandenburg",
-      completed: false,
-    };
+  const task2 = {
+    title: 'Lay siege to Brandenburg',
+    completed: false,
+  };
   return (
     <>
       <Header />
