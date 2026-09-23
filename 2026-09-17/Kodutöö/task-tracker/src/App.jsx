@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { TaskForm } from './components/TaskForm';
 
 import './App.css';
+
 import Header from './components/Header';
 import TaskCard from './components/TaskCard';
 
@@ -13,6 +14,7 @@ function App() {
   ]);
 
   const [filter, setFilter] = useState("all");
+  const nextId = useRef(3);
 
   function toggleTask(id) {
     setTasks((previous) =>
@@ -25,8 +27,16 @@ function App() {
   function addTask(title) {
     setTasks((previous) => [
       ...previous,
-      { id: crypto.randomUUID(), title, completed: false },
+      {
+        id: Math.max(0, ...previous.map((task) => task.id)) + 1,
+        title,
+        completed: false,
+      },
     ]);
+  }
+
+  function deleteTask(id) {
+    setTasks((previous) => previous.filter((task) => task.id !== id));
   }
 
   const filteredTasks = tasks.filter((task) => {
@@ -44,7 +54,7 @@ function App() {
         </div>
 
         <TaskForm onAddTask={addTask} />
-        
+
         <div>
           <button onClick={() => setFilter("all")}>All tasks</button>
           <button onClick={() => setFilter("completed")}>
@@ -59,7 +69,12 @@ function App() {
           <p>No tasks found</p>
         ) : (
           filteredTasks.map((task) => (
-            <TaskCard key={task.id} task={task} onToggle={toggleTask} />
+            <TaskCard key=
+              {task.id} 
+              task={task} 
+              onToggle={toggleTask}
+              onDelete={deleteTask}
+            />
           ))
         )}
       </section>
