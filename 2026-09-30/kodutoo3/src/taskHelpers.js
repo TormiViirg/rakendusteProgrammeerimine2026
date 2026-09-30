@@ -13,3 +13,21 @@ export function getCompletedTasks(tasks) {
 export function getIncompleteTasks(tasks) {
   return tasks.filter((task) => task.status !== "completed");
 }
+
+export function createTask(tasks, title) {
+
+  const highestId = tasks.reduce((highestId, task) => {
+    const id = Number(task.id);
+    return Number.isInteger(id) && id > highestId ? id : highestId;
+  }, 0);
+
+  const task = {
+    id: highestId + 1,
+    title,
+    status: "in progress",
+    completed: false
+  };
+
+  tasks.push(task);
+  return task;
+}
