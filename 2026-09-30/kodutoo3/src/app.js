@@ -2,13 +2,19 @@ import express, { request, response } from "express";
 
 import { tasks } from "./index.js";
 
-import { getTaskById } from "./taskHelpers.js";
+import { 
+    getAllTasks,
+    getTaskById,
+    getCompletedTasks,
+    getIncompleteTasks
+} from "./taskHelpers.js";
 
 const app = express();
 
 app.get("/api/health", (_request, response) => {
     response.status(200).json({ status: "ok"});
 });
+
 
 app.get("/api/tasks/:id", (request, response) => {
 
@@ -20,6 +26,29 @@ app.get("/api/tasks/:id", (request, response) => {
 
     return response.status(200).json(task);
 });
+
+
+app.get("/api/tasks", (request, response) => {
+
+    const { completed } = request.query;
+
+    if (completed === undefined) {
+        return response.status(200).json(getAllTasks(tasks));
+    }
+
+    if (completed !== "true" && completed !== "false") {
+        return response.status(400).json({
+            message: "The completed query must be true or false"
+        });
+    }
+
+    const filteredTasks = completed === "true"
+        ? getCompletedTasks(tasks)
+        : getIncompleteTasks(tasks);
+
+    return response.status(200).json(filteredTasks);
+})
+
 
 app.use((_request, response) => {
     response.status(404).json({ message: "Route not found" });

@@ -9,3 +9,7 @@ export function getTaskById(tasks, id) {
 export function getCompletedTasks(tasks) {
   return tasks.filter((task) => task.status === "completed");
 }
+
+export function getIncompleteTasks(tasks) {
+  return tasks.filter((task) => task.status !== "completed");
+}
