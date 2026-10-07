@@ -1,6 +1,7 @@
 import styles from "./page.module.css";
 import Link from "next/link";
-import Counter from "./components/counter";
+import Counter from "./components/Counter";
+import ServerMessage from "./components/ServerMessage";
 
 export default function Home() {
   return (
@@ -19,7 +20,8 @@ export default function Home() {
           <a> This is home</a>
           <Link href="/about"> This is who I have become</Link>
         </div>
-        <Counter/>
+        <Counter />
+        <ServerMessage />
       </main>
     </div>
   );
