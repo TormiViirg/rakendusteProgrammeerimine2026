@@ -1,5 +1,5 @@
-import Image from "next/image";
 import styles from "./page.module.css";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -13,15 +13,10 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
             Deploy Now
           </a>
+          <a> This is home</a>
+          <Link href="/about"> This is who I have become</Link>
         </div>
       </main>
     </div>
