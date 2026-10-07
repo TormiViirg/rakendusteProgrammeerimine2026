@@ -1,5 +1,6 @@
 import styles from "./page.module.css";
 import Link from "next/link";
+import Counter from "./components/counter";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
           <a> This is home</a>
           <Link href="/about"> This is who I have become</Link>
         </div>
+        <Counter/>
       </main>
     </div>
   );
