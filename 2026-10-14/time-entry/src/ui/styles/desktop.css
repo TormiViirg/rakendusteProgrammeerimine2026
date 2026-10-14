@@ -1,0 +1,667 @@
+/*
+ * Desktop layout. 1u is derived from the 12-column grid of the mock-ups
+ * (32u margins, 96u columns, 20u gutters at 1440 wide) and the number of day
+ * columns on the page – see app/layout.ts. Every size below is in u, so
+ * margins, gutters, rows and type all move together.
+ */
+.d {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+}
+.d-cols {
+  display: grid;
+  grid-template-columns: var(--columns);
+  column-gap: calc(20 * var(--u));
+  padding: 0 calc(32 * var(--u));
+}
+/* the pinned bars sit outside the scroll container: leave room for its scrollbar so the columns line up */
+.d-comments .d-cols {
+  padding-right: calc(32 * var(--u) + var(--scrollbar, 0px));
+}
+.d-lang {
+  flex: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: calc(10 * var(--u));
+  padding: calc(4 * var(--u)) calc(32 * var(--u)) 0;
+  height: calc(19 * var(--u));
+  font-size: calc(14 * var(--u));
+}
+.d-dev {
+  color: var(--hint);
+  text-decoration: none;
+  font-size: calc(14 * var(--u));
+}
+
+/* ── Top: mini calendar, navigation, day headers – sticky inside the scroller ── */
+.d-top {
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  background: var(--paper);
+  grid-template-rows: calc(56 * var(--u)) calc(74 * var(--u));
+  padding-bottom: calc(6 * var(--u));
+}
+.cal {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  border: 1px solid var(--ink);
+  font-family: var(--mono);
+  font-size: calc(11 * var(--u));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.cal__year {
+  text-align: center;
+  color: var(--muted);
+  line-height: var(--line);
+  border-bottom: 1px solid var(--ink);
+}
+.cal__months {
+  display: grid;
+  font-family: var(--sans);
+  border-bottom: 1px solid var(--ink);
+}
+.cal__months button {
+  line-height: var(--line);
+  font-size: 1.1em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cal__months .is-on {
+  background: var(--ink);
+  color: var(--paper);
+}
+.cal__head,
+.cal__week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+}
+.cal__head {
+  color: var(--muted);
+  font-size: 0.9em;
+  line-height: var(--line);
+  border-bottom: 1px solid var(--ink);
+}
+.cal__weeks {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.cal__week {
+  line-height: var(--line);
+}
+.cal__week.is-on {
+  background: var(--row-alt);
+}
+.cal__week button:hover {
+  background: var(--chosen);
+}
+.cal__week .is-other {
+  color: var(--hint);
+}
+.cal__out {
+  color: var(--track);
+  font-size: 0.8em;
+}
+
+.d-nav {
+  grid-column: 2 / -1;
+  grid-row: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: calc(20 * var(--u));
+  min-width: 0;
+}
+.d-nav__btn {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: calc(-3 * var(--u));
+}
+.d-nav__btn:disabled {
+  color: var(--hint);
+}
+.d-nav__title {
+  display: flex;
+  align-items: center;
+  gap: calc(9 * var(--u));
+  font-size: calc(30 * var(--u));
+  font-weight: 500;
+  line-height: calc(40 * var(--u));
+  white-space: nowrap;
+}
+.d-nav__title svg {
+  width: calc(14 * var(--u));
+}
+.d-nav__caption {
+  font-size: calc(16 * var(--u));
+  font-weight: 500;
+  line-height: calc(17 * var(--u));
+  white-space: nowrap;
+}
+.d-nav--range {
+  gap: calc(12 * var(--u));
+}
+.d-nav--range .d-nav__title {
+  /* at most a quarter smaller than the week title, like every shrinking component */
+  font-size: calc(30 * var(--shrink-floor) * var(--u));
+  line-height: calc(40 * var(--u));
+  gap: calc(6 * var(--u));
+}
+.d-nav--range .d-nav__title svg {
+  width: calc(14 * var(--shrink-floor) * var(--u));
+}
+.d-nav--range .d-nav__caption {
+  font-size: calc(16 * var(--shrink-floor) * var(--u));
+}
+.d-nav--range .d-nav__btn {
+  /* never wider than a third of the slot: a long title wraps instead of spilling out */
+  flex: 0 1 auto;
+  max-width: 34%;
+  min-width: 0;
+}
+.d-nav--range .d-nav__title {
+  white-space: normal;
+  text-align: center;
+  line-height: 1.05;
+  min-height: calc(40 * var(--u));
+}
+.d-nav--range .d-nav__title svg {
+  flex: none;
+}
+.d-nav .feedback {
+  flex: 1 1 calc(130 * var(--u));
+  max-width: calc(350 * var(--u));
+  min-width: calc(130 * var(--u));
+  margin-top: calc(1 * var(--u));
+}
+
+.d-day {
+  grid-row: 2;
+  position: relative;
+  border: 1px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  line-height: 1.22;
+}
+.d-day strong {
+  font-size: calc(24 * var(--u));
+  font-weight: 600;
+}
+.d-day span {
+  font-size: calc(24 * var(--u));
+}
+.d-day.is-today {
+  border-top: calc(6 * var(--u)) solid var(--ink);
+}
+.d-day.is-today strong,
+.d-day.is-today > span:not(.d-day__lock) {
+  text-decoration: underline;
+  text-decoration-thickness: calc(1.2 * var(--u));
+  text-underline-offset: calc(2 * var(--u));
+}
+.d-day.is-past {
+  color: var(--muted);
+}
+.d-day__lock {
+  position: absolute;
+  right: calc(8 * var(--u));
+  top: calc(10 * var(--u));
+}
+.d-day__lock svg {
+  width: calc(18 * var(--u));
+  display: block;
+}
+
+/* ── Hour grid (the only part that scrolls) ─────────────────────────────── */
+.d-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.d-grid {
+  padding-bottom: calc(12 * var(--u));
+}
+.d-time {
+  border: 1px solid var(--ink);
+  margin-bottom: -1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: calc(24 * var(--u));
+  white-space: nowrap;
+  background: var(--paper);
+}
+.d-time.is-alt,
+.d-cell.is-alt {
+  background: var(--row-alt);
+}
+.d-time small {
+  font-family: var(--sans);
+  font-size: calc(9.5 * var(--u));
+  color: var(--muted);
+  line-height: 1;
+  margin-top: calc(-1 * var(--u));
+}
+.d-midnight {
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+  font-size: calc(14 * var(--u));
+  line-height: 1.25;
+  padding: calc(4 * var(--u)) calc(6 * var(--u));
+  min-width: 0;
+}
+.d-midnight .d-help {
+  margin-left: calc(5 * var(--u));
+}
+.d-help {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+  cursor: help;
+}
+.d-help svg {
+  width: calc(16 * var(--u));
+}
+.d-help:hover::after,
+.d-help:focus::after {
+  content: attr(data-tip);
+  position: absolute;
+  z-index: 10;
+  bottom: calc(100% + 6 * var(--u));
+  right: calc(-10 * var(--u));
+  width: calc(200 * var(--u));
+  padding: calc(6 * var(--u)) calc(8 * var(--u));
+  background: var(--ink);
+  color: var(--paper);
+  font-size: calc(12 * var(--u));
+  line-height: 1.3;
+}
+
+.d-col {
+  grid-row: 1 / -1;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
+  position: relative;
+}
+.d-col > * {
+  grid-column: 1;
+}
+.d-closed {
+  position: relative;
+  border: 1px solid var(--ink);
+  margin-bottom: -1px;
+  background: var(--paper);
+  z-index: 1;
+}
+.d-cell {
+  position: relative;
+  border: 1px solid var(--ink);
+  margin-bottom: -1px;
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  cursor: pointer;
+  user-select: none;
+  touch-action: none;
+}
+.d-cell:focus-visible {
+  z-index: 2;
+  outline-offset: calc(-2 * var(--u));
+}
+.d-cell--selected,
+.d-cell--selectedLocked {
+  background: var(--chosen);
+  /* the feedback accent, echoing the strip on the phone cards */
+  box-shadow: inset calc(4 * var(--u)) 0 0 var(--accent);
+}
+.d-cell--selected.is-alt,
+.d-cell--selectedLocked.is-alt {
+  background: var(--chosen);
+}
+.d-cell--selectedLocked,
+.d-cell--leaderAdded {
+  cursor: default;
+}
+.d-cell--leaderAdded,
+.d-cell--leaderRemoved,
+.d-cell--leaderAdded.is-alt,
+.d-cell--leaderRemoved.is-alt {
+  background: var(--leader);
+  color: var(--paper);
+  box-shadow: inset calc(4 * var(--u)) 0 0 var(--team);
+}
+.d-cell__text {
+  font-size: calc(14 * var(--u));
+  text-align: center;
+  line-height: 1.1;
+  padding: 0 calc(3 * var(--u)) 0 calc(6 * var(--u));
+}
+.d-cell__new {
+  font-size: calc(10 * var(--u));
+  line-height: 1.3;
+  text-align: center;
+  white-space: pre-line;
+  padding: 0 calc(3 * var(--u));
+}
+.d-cell--new,
+.d-cell--new.is-alt {
+  background: var(--paper);
+}
+.d-cell__icon {
+  width: calc(18 * var(--u));
+  pointer-events: none;
+}
+.d-cell__icon--check {
+  width: calc(20 * var(--u));
+  color: var(--paper);
+}
+.d-cell--selectedLocked {
+  --lock-hole: var(--chosen);
+}
+.d-cell.is-preview-add,
+.d-cell.is-preview-add.is-alt {
+  background: oklch(0.86 0 0);
+}
+.d-cell.is-preview-remove,
+.d-cell.is-preview-remove.is-alt {
+  background: oklch(0.91 0 0);
+}
+.d-cell.is-past {
+  cursor: default;
+  color: var(--muted);
+}
+.d-cell.is-past.d-cell--selectedLocked,
+.d-cell.is-past.d-cell--selected {
+  background: oklch(0.87 0 0);
+}
+.d-cell.is-past.d-cell--leaderAdded,
+.d-cell.is-past.d-cell--leaderRemoved {
+  background: oklch(0.62 0 0);
+  color: var(--paper);
+}
+.d-cell.is-veiled,
+.d-cell.is-veiled.is-alt {
+  cursor: default;
+  border-top-color: oklch(0 0 0 / 0);
+  border-bottom-color: oklch(0 0 0 / 0);
+  background: linear-gradient(180deg, oklch(0.88 0 0), oklch(0.955 0 0) 28%, oklch(0.955 0 0) 72%, oklch(0.88 0 0));
+}
+.d-cell.is-veiled > *:not(.d-cell__gap) {
+  display: none;
+}
+/* the cell's content sits in its widest open part */
+.d-cell__body {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+.d-cell__body.is-tight .wheel__near {
+  display: none;
+}
+.d-cell__body.is-tight .d-edge label span {
+  display: none;
+}
+/* a closed part of a row – a gap shorter than an hour between two pieces */
+.d-cell__gap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: var(--paper);
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* exact start / end on the first and last cell of a run */
+.d-edge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(6 * var(--u));
+  min-width: 0;
+  /* only the wheels catch the pointer – a click beside them still toggles the cell */
+  pointer-events: none;
+}
+.d-edge .wheel {
+  pointer-events: auto;
+  cursor: default;
+}
+.d-edge label {
+  display: flex;
+  align-items: center;
+  gap: calc(6 * var(--u));
+  font-size: calc(14 * var(--u));
+  white-space: nowrap;
+  min-width: 0;
+}
+.d-edge .wheel--sm {
+  font-size: calc(16.5 * var(--u));
+  width: 3.15em;
+}
+/* near rows kept inside the 46 u row: 11 + 20 + 11 */
+.d-edge .wheel--sm .wheel__near {
+  font-size: calc(11 * var(--u));
+  height: calc(11 * var(--u));
+  color: oklch(0.93 0 0);
+}
+.d-edge--both span {
+  display: none;
+}
+
+/* first view: veil over the column – its outline stays crisp above the blur; the prompt floats in the visible middle */
+.d-veil {
+  position: relative;
+  z-index: 3;
+  pointer-events: none;
+  border: 1px solid var(--ink);
+  margin-bottom: -1px;
+}
+.d-prompt {
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: auto;
+  container-type: inline-size;
+  background: oklch(0.955 0 0 / 0.85);
+  border: 1px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: calc(12 * var(--u));
+  padding: calc(8 * var(--u));
+  font-size: calc(12 * var(--u));
+  line-height: 1.17;
+  min-width: 0;
+}
+.d-prompt p .d-help {
+  margin-left: calc(6 * var(--u));
+}
+/* "Mulle sobib" and both wheels stay on one line: they shrink together with the column, down to the floor */
+.d-prompt__entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5em;
+  white-space: nowrap;
+  font-size: clamp(calc(14 * var(--shrink-floor) * var(--u)), 6.2cqw, calc(14 * var(--u)));
+}
+.d-prompt__entry .wheel--sm {
+  font-size: 1em;
+}
+.d-prompt__wheels {
+  display: flex;
+  align-items: center;
+}
+.d-prompt__wheels i {
+  font-style: normal;
+  font-family: var(--mono);
+  width: 1.4em;
+  height: 1.22em;
+  line-height: 1.1em;
+  text-align: center;
+  border: 1px solid var(--ink);
+  border-width: 1px 0;
+  background: var(--paper);
+}
+.d-prompt__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(6 * var(--u)) calc(8 * var(--u));
+}
+.d-prompt__buttons .btn {
+  flex: 1 1 auto;
+}
+
+/* ── Pinned bottom: comment bar and footer ──────────────────────────────── */
+.d-comments {
+  flex: none;
+  background: var(--bar);
+  color: var(--paper);
+}
+.d-comments__inner {
+  min-height: calc(43 * var(--u));
+  align-items: stretch;
+}
+.d-comments__label {
+  border: 1px solid var(--paper);
+  margin: calc(1 * var(--u)) 0 calc(-1 * var(--u));
+  display: grid;
+  place-items: center;
+  font-size: calc(20 * var(--u));
+}
+.d-comments__day {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+.d-comment {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.d-comment input {
+  width: 100%;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: calc(5 * var(--u)) calc(18 * var(--u)) calc(5 * var(--u)) calc(15 * var(--u));
+  font-size: calc(12 * var(--u));
+  color: var(--paper);
+  text-overflow: ellipsis;
+}
+.d-comment input::placeholder {
+  color: var(--paper);
+  opacity: 1;
+}
+.d-comment input:focus {
+  outline: 1px solid var(--paper);
+}
+.d-comment input:focus::placeholder {
+  opacity: 0.4;
+}
+.d-comment__tick {
+  position: absolute;
+  right: calc(4 * var(--u));
+  width: calc(11 * var(--u));
+  color: var(--paper);
+  pointer-events: none;
+}
+
+.d-foot {
+  flex: none;
+  background: var(--dock);
+  display: flex;
+  align-items: center;
+  gap: calc(26 * var(--u));
+  padding: calc(18 * var(--u)) calc(32 * var(--u)) calc(22 * var(--u)) calc(34 * var(--u));
+}
+.d-foot p {
+  flex: 1;
+  font-size: calc(20 * var(--u));
+  line-height: calc(24 * var(--u));
+}
+.d-confirm {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(22 * var(--u));
+  width: calc(329 * var(--u));
+  height: calc(72 * var(--u));
+  background: var(--ink);
+  color: var(--paper);
+  font-size: calc(32 * var(--u));
+}
+.d-confirm svg {
+  width: calc(36 * var(--u));
+}
+.d-confirm:disabled {
+  background: var(--muted);
+}
+
+/* ── Developer matrix page ──────────────────────────────────────────────── */
+.matrix {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+  font-size: 15px;
+}
+.matrix h1 {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+.matrix__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 16px 0;
+}
+.matrix__filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.matrix table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.matrix th,
+.matrix td {
+  text-align: left;
+  padding: 4px 10px;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+.matrix a {
+  color: var(--focus);
+}

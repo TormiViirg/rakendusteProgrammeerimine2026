@@ -1,0 +1,152 @@
+/*
+ * Location sheet (ui/place/PlaceOverlay.tsx). Lengths inside the sheet are the
+ * overlay tokens, scaled to its size: var(--o-<name>).
+ * (Leaflet's own chrome is restyled in adapters/leaflet/leaflet.css.)
+ */
+
+.place {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  background: var(--t-overlay-tint);
+  backdrop-filter: blur(var(--t-overlay-blurPx));
+  -webkit-backdrop-filter: blur(var(--t-overlay-blurPx));
+  animation: place-in 0.14s ease-out;
+}
+@keyframes place-in {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .place {
+    animation: none;
+  }
+}
+.place__sheet {
+  position: relative;
+}
+/* the brochure: three folded panels with slanted edges, as paper + outline */
+.place__shape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.place__paper {
+  fill: var(--t-color-paper);
+  stroke: var(--t-color-ink);
+  stroke-width: var(--t-overlay-stroke);
+  vector-effect: non-scaling-stroke;
+}
+.place__fold {
+  stroke: var(--t-color-rule);
+  stroke-width: var(--t-overlay-stroke);
+  vector-effect: non-scaling-stroke;
+}
+.place__content {
+  position: absolute;
+  inset: calc(var(--t-overlay-insetTop) * 100%) 0 calc(var(--t-overlay-insetBottom) * 100%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--o-gap);
+  padding: 0 var(--o-padX);
+}
+.place__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--o-gap);
+}
+.place__names {
+  min-width: 0;
+}
+.sc .place__title {
+  font-size: var(--o-titleFs);
+  line-height: var(--o-titleLh);
+  font-weight: 600;
+  text-wrap: balance;
+}
+.place__hall {
+  margin: 0;
+  font-size: var(--o-hallFs);
+  line-height: calc(var(--o-hallFs) * 1.2);
+  font-weight: 600;
+}
+.place__close {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--o-closeSize);
+  height: var(--o-closeSize);
+  border: var(--t-overlay-stroke) solid var(--t-color-ink);
+  background: var(--t-color-paper);
+}
+.place__close svg {
+  width: 42%;
+  height: 42%;
+}
+.place__close:focus-visible {
+  outline: var(--t-page-focusRing) solid var(--t-color-ink);
+  outline-offset: var(--t-page-focusRing);
+}
+.place__map {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 0;
+  border: var(--t-overlay-stroke) solid var(--t-color-ink);
+  /* Leaflet's panes use z-indexes up to 1000: keep them inside */
+  isolation: isolate;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 calc(var(--o-labelFs) - 1px), var(--t-color-rule) 0 var(--o-labelFs)),
+    repeating-linear-gradient(90deg, transparent 0 calc(var(--o-labelFs) - 1px), var(--t-color-rule) 0 var(--o-labelFs));
+}
+.place__leaflet {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  font-family: var(--t-font-text);
+}
+/* the pin: the age badge's diamond */
+.place__pin > span {
+  position: absolute;
+  left: calc(var(--o-pin) / -2);
+  top: calc(var(--o-pin) / -2);
+  width: var(--o-pin);
+  height: var(--o-pin);
+  transform: rotate(45deg);
+  background: var(--t-color-ink);
+  outline: calc(var(--o-gap) / 4) solid var(--t-color-paper);
+}
+.place__nomap {
+  position: absolute;
+  left: 50%;
+  bottom: var(--o-gap);
+  transform: translateX(-50%);
+  margin: 0;
+  padding: calc(var(--o-gap) / 4) calc(var(--o-gap) * 0.75);
+  background: var(--t-color-paper);
+  border: var(--t-overlay-stroke) solid var(--t-color-ink);
+  font-size: var(--o-labelFs);
+  line-height: calc(var(--o-labelFs) * 1.33);
+  white-space: nowrap;
+  z-index: 1000;
+}
+.place__info {
+  flex: none;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: var(--o-gap);
+  row-gap: calc(var(--o-gap) / 4);
+  max-height: 34%;
+  overflow: auto;
+  font-size: var(--o-textFs);
+  line-height: var(--o-textLh);
+}
+.place__info dt {
+  color: var(--t-color-gray);
+  font-size: var(--o-labelFs);
+}

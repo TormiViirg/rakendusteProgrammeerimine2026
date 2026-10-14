@@ -1,0 +1,143 @@
+/* Wide tickets: the stub — coloured strip and footer row. Heights are fixed. */
+
+.w-strip {
+  display: flex;
+  align-items: stretch;
+  /* fixed: the same on every ticket */
+  height: var(--t-wide-strip-h);
+  overflow: hidden;
+  margin: 0 var(--t-wide-strip-inset);
+  background: var(--tone);
+  color: var(--t-color-paper);
+  font-size: var(--t-wide-strip-fs);
+  --icon-hole: var(--tone);
+}
+.w-strip__code--lead {
+  flex: 0 0 var(--t-wide-strip-lead);
+}
+.w-strip__code--mid {
+  flex: 0 0 var(--t-wide-strip-mid);
+}
+.w-strip__code--end {
+  flex: 0 0 var(--t-wide-strip-end);
+}
+.w-strip__code--grow {
+  flex: 1 1 0;
+}
+.w-strip__block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--t-wide-strip-gap);
+  min-width: 0;
+  padding-right: var(--t-wide-strip-padRight);
+}
+/* screening strip: fixed barcodes, the two blocks share the rest 213 : 310 */
+.wk--screening .w-strip {
+  display: grid;
+  grid-template-columns:
+    var(--t-wide-strip-lead) minmax(0, var(--t-wide-strip-blockA)) var(--t-wide-strip-mid)
+    minmax(0, var(--t-wide-strip-blockB)) var(--t-wide-strip-end);
+}
+.w-strip__block--a {
+  padding-left: var(--t-wide-strip-aPadLeft);
+}
+.w-strip__block--b {
+  padding-left: var(--t-wide-strip-bPadLeft);
+}
+.w-strip__label {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+.w-strip__value {
+  flex: none;
+  margin-left: auto;
+}
+.w-strip .measure .mono {
+  font-size: var(--t-wide-strip-numFs);
+  letter-spacing: 0;
+}
+.w-strip .measure__unit {
+  margin-left: var(--t-wide-strip-unitGap);
+}
+/* headline and role tickets: barcode with solid caps */
+.w-strip--open {
+  background: var(--t-color-paper);
+}
+.w-strip__cap {
+  flex: 0 0 var(--t-wide-strip-cap);
+  background: var(--tone);
+}
+
+/* footer row */
+
+.w-foot {
+  display: flex;
+  align-items: center;
+  height: var(--t-wide-foot-h);
+  overflow: hidden;
+  font-size: var(--t-wide-foot-fs);
+  color: var(--t-color-dark);
+}
+.w-foot .measure .mono {
+  font-size: var(--t-wide-foot-numFs);
+  letter-spacing: 0;
+}
+.w-foot--cols {
+  gap: var(--t-wide-foot-gap);
+  padding: 0 var(--t-wide-foot-padRight) 0 calc(var(--t-wide-foot-padLeft) - var(--ws));
+}
+.w-foot__bc {
+  flex: 0 0 calc(var(--t-wide-foot-bcMinW) - var(--t-wide-foot-gap));
+  min-width: 0;
+}
+.w-foot__qa {
+  flex: 0 0 auto;
+}
+/* the cinema's address: shown when two or fewer columns are filled */
+.w-foot__address {
+  flex: 1 1 0;
+  min-width: 0;
+  color: var(--t-color-gray);
+  font-family: 'Fira Sans Condensed', var(--t-font-text);
+}
+.w-foot__address:only-child {
+  text-align: center;
+}
+.w-foot__audience {
+  flex: 1 1 0;
+  min-width: 0;
+  padding-right: calc(var(--t-wide-foot-audienceGap) - var(--t-wide-foot-gap));
+  text-align: right;
+  color: var(--t-color-ink);
+  /* pushes the code to the right edge when BC / Q&A are absent */
+  margin-left: auto;
+}
+.w-foot__code {
+  flex: 0 0 var(--t-wide-foot-codeBasis);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--t-wide-foot-gap);
+  min-width: 0;
+  color: var(--t-color-ink);
+}
+.w-foot__code-label {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+.w-foot__code-value {
+  /* its own width; gives way only when a code is longer than it should be */
+  flex: 0 1 auto;
+  min-width: 0;
+}
+.w-foot--caption {
+  justify-content: center;
+  padding: 0 calc(40 * var(--u));
+  color: var(--t-color-gray);
+  font-family: 'Fira Sans Condensed', var(--t-font-text);
+  text-align: center;
+}
+.w-foot--caption .fit {
+  width: 100%;
+}

@@ -1,0 +1,48 @@
+/*
+ * Layout only. Every size, gap and colour is a token (src/design/tokens) that
+ * arrives as a CSS custom property:  thin.role.titleFs → var(--t-thin-role-titleFs).
+ * Lengths are already multiplied by --u (CSS px per design point).
+ * `npm run check` fails when a stylesheet uses a variable that is not a token.
+ */
+
+.sc {
+  --u: 1px;
+  /* where the sticky block pins: below the notch / status bar on phones */
+  --sticky-offset: env(safe-area-inset-top, 0px);
+
+  background: var(--t-color-paper);
+  color: var(--t-color-ink);
+  font-family: var(--t-font-text);
+  font-synthesis: none;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+.sc *,
+.sc *::before,
+.sc *::after {
+  box-sizing: border-box;
+}
+.sc .mono {
+  font-family: var(--t-font-mono);
+  font-weight: 400;
+}
+/* zero-specificity resets so component rules always win */
+:where(.sc) :where(button) {
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+:where(.sc) :where(h1, h2, h3, dl, dd) {
+  margin: 0;
+  font-weight: inherit;
+  font-size: inherit;
+}
+:where(.sc) a {
+  color: inherit;
+}

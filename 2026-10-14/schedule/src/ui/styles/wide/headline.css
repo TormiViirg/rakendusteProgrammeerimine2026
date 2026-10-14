@@ -1,0 +1,86 @@
+/* WIDE HEADLINE template (ui/templates/wide/HeadlineTicket.tsx) — tokens: wide.headline */
+
+.wh-body {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--t-wide-headline-bodyPadTop) 0 var(--t-wide-headline-bodyPadBottom);
+}
+.wh-body > * {
+  flex: none;
+}
+.wh-title {
+  /* sits on the bottom of the body; extra lines grow upwards */
+  margin-top: auto;
+  padding: 0 var(--t-wide-headline-titlePadX);
+  text-align: center;
+  font-weight: 400;
+}
+.wh-title__button {
+  cursor: pointer;
+}
+.wh-title__wrap {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: top;
+}
+.wh-title__text {
+  text-decoration: underline;
+  text-decoration-thickness: var(--t-wide-headline-underThick);
+  text-underline-offset: var(--t-wide-headline-underOffset);
+  text-decoration-skip-ink: none;
+}
+.wh-title__map {
+  position: absolute;
+  left: calc(100% + var(--t-wide-headline-mapLeft));
+  top: var(--t-wide-headline-mapTop);
+  width: var(--t-wide-headline-mapW);
+  height: var(--t-wide-headline-mapH);
+  pointer-events: none;
+}
+/* a wrapped title grows upwards into the weekday line's height: the icon moves beside the last line */
+.wh-title__wrap:has(.fit[data-used]:not([data-used='1'])) .wh-title__map {
+  top: auto;
+  bottom: var(--t-wide-headline-mapBottomWrapped);
+}
+/* night shifts carry wolf prints on both sides of the title */
+.wk--night .wh-title {
+  padding: 0 var(--t-wide-headline-titlePadXNight);
+}
+.wh-paw {
+  position: absolute;
+  width: auto;
+  height: var(--t-wide-headline-pawH);
+  pointer-events: none;
+}
+.wh-paw--1 {
+  right: var(--t-wide-headline-paw1Right);
+  top: var(--t-wide-headline-paw1Top);
+}
+.wh-paw--2 {
+  left: var(--t-wide-headline-paw2Left);
+  bottom: var(--t-wide-headline-paw2Bottom);
+}
+.wh-paw--3 {
+  left: var(--t-wide-headline-paw3Left);
+  bottom: var(--t-wide-headline-paw3Bottom);
+}
+
+/* `single` option: one time row, centred in the space the two rows normally take */
+.wh--single .times {
+  min-height: calc(2 * var(--t-wide-headline-times-lh));
+  align-content: center;
+  grid-template-columns: calc(var(--t-wide-headline-singleValueX) - var(--t-wide-headline-times-labelX)) max-content;
+}
+/* `large` option: a larger title, closer to the times */
+.wh--large .wh-title {
+  margin-top: var(--t-wide-headline-largeTitleMarginTop);
+}
+.wh--large .wh-title__text {
+  text-decoration-thickness: var(--t-wide-headline-largeUnderThick);
+}
+.wh--large.wk--night .wh-title {
+  margin-top: calc(var(--t-wide-headline-largeTitleMarginTop) + var(--t-wide-headline-largeNightGap));
+}

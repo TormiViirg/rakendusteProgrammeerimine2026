@@ -1,0 +1,134 @@
+/* THIN SCREENING template (tickets/screening/view/Thin.tsx) — tokens: thin.screening */
+
+.rating {
+  position: absolute;
+  top: var(--t-thin-screening-ratingTop);
+  right: 0;
+  width: var(--t-thin-screening-ratingBox);
+  height: var(--t-thin-screening-ratingBox);
+}
+.rating::before {
+  content: '';
+  position: absolute;
+  inset: var(--t-thin-screening-ratingInset);
+  transform: rotate(45deg);
+  background: var(--t-color-paper);
+  border: var(--t-thin-screening-ratingStroke) solid var(--tone);
+}
+.rating__text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(calc(-50% + var(--t-thin-screening-ratingNudgeX)), calc(-50% + var(--t-thin-screening-ratingNudgeY)));
+  font-size: var(--t-thin-screening-ratingFs);
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--tone);
+}
+.rating__prefix {
+  font-weight: 700;
+}
+
+.scr-body {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--t-thin-screening-bodyPadTop) 0 var(--t-thin-screening-bodyPadBottom);
+}
+.scr-body > * {
+  flex: none;
+}
+/* spare room collects under the times: the film block keeps the mockup's distance to the strip */
+.scr-body > .scr-spacer {
+  flex: 1 1 0;
+}
+.scr-cols {
+  display: grid;
+  grid-template-columns: minmax(0, var(--t-thin-screening-colLeft)) minmax(0, var(--t-thin-screening-colRight));
+  column-gap: var(--t-thin-screening-colGap);
+  align-items: end;
+  margin: var(--t-thin-screening-colsMarginTop) var(--t-thin-screening-colsMarginR) 0 var(--t-thin-screening-colsMarginL);
+}
+.scr-left,
+.scr-right {
+  min-width: 0;
+}
+.has-rating .scr-cols {
+  min-height: var(--t-thin-screening-colsMinH);
+}
+.scr-caption {
+  color: var(--t-color-gray);
+}
+.scr-audience {
+  margin-top: var(--t-thin-screening-audienceMarginTop);
+  text-align: center;
+  text-wrap: balance;
+}
+.scr-caption--film {
+  margin-top: var(--t-thin-screening-filmCaptionMarginTop);
+}
+.scr-right {
+  margin-bottom: var(--t-thin-screening-rightMarginBottom);
+  padding-top: var(--t-thin-screening-rightPadTop);
+  text-align: center;
+}
+.scr-venue__name {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+/* symmetric padding reserves room for the help icon without pulling the name off-centre */
+.scr-venue__name--help {
+  padding: 0 var(--t-thin-screening-helpPad);
+}
+.scr-venue__help {
+  position: absolute;
+  cursor: pointer;
+  right: 0;
+  top: var(--t-thin-screening-helpTop);
+  width: var(--t-thin-screening-helpSize);
+  height: var(--t-thin-screening-helpSize);
+}
+.scr-venue__help svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.scr-hall {
+  margin-top: var(--t-thin-screening-hallMarginTop);
+  font-weight: 600;
+}
+.scr-role {
+  margin-top: var(--t-thin-screening-roleMarginTop);
+  color: var(--tone);
+}
+.scr-film {
+  position: relative;
+  margin-top: var(--t-thin-screening-filmMarginTop);
+  padding: 0 var(--t-thin-screening-filmPadX) var(--t-thin-screening-filmPadBottom);
+  font-weight: 600;
+  text-align: center;
+  text-wrap: balance;
+}
+.scr-film::after {
+  content: '';
+  position: absolute;
+  left: var(--t-thin-screening-ruleLeft);
+  right: var(--t-thin-screening-ruleRight);
+  bottom: 0;
+  height: var(--t-thin-screening-ruleH);
+  background: var(--t-color-rule);
+}
+.scr-programme {
+  margin: var(--t-thin-screening-progMarginTop) var(--t-thin-screening-progMarginR) 0 var(--t-thin-screening-progMarginL);
+  color: var(--t-color-gray);
+}
+.scr-subs {
+  display: grid;
+  grid-template-columns: minmax(var(--t-thin-screening-subsLabelMin), max-content) minmax(0, 1fr);
+  margin: var(--t-thin-screening-subsMarginTop) var(--t-thin-screening-subsMarginR) 0 var(--t-thin-screening-subsMarginL);
+}
+.scr-subs__label {
+  padding-right: var(--t-thin-screening-subsLabelPad);
+}

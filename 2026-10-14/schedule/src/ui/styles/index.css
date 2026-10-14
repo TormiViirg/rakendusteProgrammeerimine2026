@@ -1,0 +1,25 @@
+/*
+ * The stylesheets, in cascade order. Keep the order: later files rely on it.
+ *
+ *   base, page      the page around the tickets
+ *   frame, fit      what every ticket is made of
+ *   parts/…         pieces shared between templates
+ *   thin/…, wide/…  one file per body template, plus the stub of each shape
+ */
+@import './fonts.css';
+@import './base.css';
+@import './page.css';
+@import './frame.css';
+@import './fit.css';
+@import './tip.css';
+@import './parts/holo.css';
+@import './parts/times.css';
+@import './thin/stub.css';
+@import './thin/role.css';
+@import './thin/headline.css';
+@import './thin/screening.css';
+@import './wide/screening.css';
+@import './wide/stub.css';
+@import './wide/headline.css';
+@import './wide/role.css';
+@import './place.css';

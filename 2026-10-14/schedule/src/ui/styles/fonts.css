@@ -1,0 +1,20 @@
+/* Fira Sans Extra Condensed (text), Fira Mono (times, numerals), Fira Sans Condensed (small captions) — only the subsets ET / EN / RU need. */
+@import '@fontsource/fira-sans-extra-condensed/latin-400.css';
+@import '@fontsource/fira-sans-extra-condensed/latin-ext-400.css';
+@import '@fontsource/fira-sans-extra-condensed/cyrillic-400.css';
+@import '@fontsource/fira-sans-extra-condensed/latin-600.css';
+@import '@fontsource/fira-sans-extra-condensed/latin-ext-600.css';
+@import '@fontsource/fira-sans-extra-condensed/cyrillic-600.css';
+@import '@fontsource/fira-sans-extra-condensed/latin-700.css';
+@import '@fontsource/fira-sans-extra-condensed/latin-ext-700.css';
+@import '@fontsource/fira-sans-extra-condensed/cyrillic-700.css';
+@import '@fontsource/fira-mono/latin-400.css';
+@import '@fontsource/fira-mono/latin-ext-400.css';
+@import '@fontsource/fira-mono/cyrillic-400.css';
+@import '@fontsource/fira-mono/latin-500.css';
+@import '@fontsource/fira-mono/latin-ext-500.css';
+@import '@fontsource/fira-mono/cyrillic-500.css';
+@import '@fontsource/fira-mono/latin-700.css';
+@import '@fontsource/fira-sans-condensed/latin-400.css';
+@import '@fontsource/fira-sans-condensed/latin-ext-400.css';
+@import '@fontsource/fira-sans-condensed/cyrillic-400.css';

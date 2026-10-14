@@ -1,0 +1,252 @@
+/* ── Time wheel ─────────────────────────────────────────────────────────── */
+.wheel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--mono);
+  touch-action: none;
+  user-select: none;
+}
+.wheel__near {
+  color: var(--hint);
+  font-family: var(--mono);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.wheel__value {
+  display: block;
+  text-align: center;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  background: var(--paper);
+  font-family: var(--mono);
+  padding: 0;
+  margin: 0;
+  outline-offset: 0;
+}
+.wheel__value::placeholder {
+  color: var(--ink);
+  opacity: 1;
+}
+.wheel.is-disabled .wheel__value {
+  color: var(--muted);
+  border-color: var(--hint);
+}
+.wheel.is-disabled .wheel__near {
+  visibility: hidden;
+}
+
+.wheel--lg {
+  width: calc(67 * var(--u));
+}
+.wheel--lg .wheel__near {
+  font-size: calc(16.33 * var(--u));
+  height: calc(22 * var(--u));
+  display: flex;
+  align-items: center;
+}
+.wheel--lg .wheel__value {
+  width: calc(67 * var(--u));
+  height: calc(31 * var(--u));
+  line-height: calc(29 * var(--u));
+  font-size: calc(20.67 * var(--u));
+}
+.wheel--static {
+  justify-content: center;
+}
+
+.wheel--sm {
+  /* sized in em so that a whole entry row shrinks in one piece (see .d-prompt__entry) */
+  font-size: calc(14 * var(--u));
+  width: 3.15em;
+}
+.wheel--sm .wheel__near {
+  font-size: 0.82em;
+  height: 1em;
+  display: flex;
+  align-items: center;
+}
+.wheel--sm .wheel__value {
+  width: 3.15em;
+  height: 1.22em;
+  line-height: 1.1em;
+  font-size: 1em;
+}
+
+/* ── Live feedback ──────────────────────────────────────────────────────── */
+.feedback {
+  overflow: hidden;
+  min-width: 0;
+}
+.feedback p {
+  overflow-wrap: anywhere;
+}
+.feedback--center {
+  text-align: center;
+}
+
+/* ── Language switch ────────────────────────────────────────────────────── */
+.lang {
+  display: flex;
+  gap: calc(5 * var(--u));
+}
+.lang button {
+  color: var(--hint);
+  font-weight: 600;
+}
+.lang button:hover {
+  color: var(--ink);
+}
+
+/* ── Crossed-out rectangle ──────────────────────────────────────────────── */
+.crossed {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Toast ──────────────────────────────────────────────────────────────── */
+.notice {
+  position: fixed;
+  left: 50%;
+  bottom: calc(96 * var(--u));
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: var(--paper);
+  padding: calc(8 * var(--u)) calc(16 * var(--u));
+  font-size: calc(16 * var(--u));
+  z-index: 20;
+  max-width: 90vw;
+  text-align: center;
+  animation: notice-in 160ms ease-out;
+}
+@keyframes notice-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(6 * var(--u)));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .notice {
+    animation: none;
+  }
+}
+
+.btn {
+  font-size: calc(11 * var(--u));
+  padding: 0 calc(6 * var(--u));
+  height: calc(27 * var(--u));
+  border: 1px solid var(--ink);
+  white-space: nowrap;
+}
+.btn--ghost {
+  background: var(--paper);
+}
+.btn--solid {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ── Touch drums ────────────────────────────────────────────────────────── */
+.drum-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: oklch(0 0 0 / 0.45);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  --drum-row: calc(44 * var(--u));
+}
+[data-layout='desktop'] .drum-backdrop {
+  align-items: center;
+  --drum-row: calc(26 * var(--u));
+}
+.drum {
+  width: min(100%, calc(393 * var(--u)));
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: calc(14 * var(--u)) calc(18 * var(--u)) calc(16 * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(10 * var(--u));
+}
+[data-layout='desktop'] .drum {
+  width: calc(240 * var(--u));
+  padding: calc(10 * var(--u)) calc(12 * var(--u));
+  gap: calc(6 * var(--u));
+}
+.drum__title {
+  font-size: calc(18 * var(--u));
+  font-weight: 600;
+}
+[data-layout='desktop'] .drum__title {
+  font-size: calc(13 * var(--u));
+}
+.drum__columns {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: calc(6 * var(--u));
+  height: calc(5 * var(--drum-row));
+}
+/* the selection band: the same box the wheel value sits in */
+.drum__columns::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(2 * var(--drum-row));
+  height: var(--drum-row);
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  pointer-events: none;
+}
+.drum__column {
+  width: calc(96 * var(--u));
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+  overscroll-behavior: contain;
+}
+.drum__column::-webkit-scrollbar {
+  display: none;
+}
+.drum__row {
+  display: block;
+  width: 100%;
+  height: var(--drum-row);
+  scroll-snap-align: start;
+  font-family: var(--mono);
+  font-size: calc(0.55 * var(--drum-row));
+  color: var(--hint);
+}
+.drum__row.is-on {
+  color: var(--ink);
+}
+.drum__colon {
+  align-self: center;
+  font-family: var(--mono);
+  font-size: calc(0.55 * var(--drum-row));
+}
+.drum__value {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: calc(0.45 * var(--drum-row));
+  color: var(--muted);
+}
+.drum__buttons {
+  display: flex;
+  gap: calc(10 * var(--u));
+}
+.drum__buttons .btn {
+  flex: 1;
+  height: calc(44 * var(--u));
+  font-size: calc(16 * var(--u));
+}
+[data-layout='desktop'] .drum__buttons .btn {
+  height: calc(27 * var(--u));
+  font-size: calc(11 * var(--u));
+}

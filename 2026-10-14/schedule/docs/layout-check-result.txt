@@ -1,0 +1,75 @@
+npm run check:layout — core screens, final build (2026-10-10)
+(the all-screens run, -- --all, was stopped after 38 minutes without a reported problem; it did not finish)
+
+432 page loads · 9720 cases · 7884 tickets drawn · 123648 expectations checked · 4 screens × 3 languages × 5 suites
+
+screen         lang suite     cases drawn   cut texts   outside    notch overflow  overlap  clipped   hidden     size    slots    opens   expect problems    drawn     base     page
+phone          et  base         4     4        0/31         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone          et  each       329   329     37/3981         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone          et  pairs      236   236    188/2439         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone          et  variants    88    88      0/1144         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone          et  invalid    153     0         0/0         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone          en  base         4     4        0/31         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone          en  each       329   329     38/3981         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone          en  pairs      236   236    230/2439         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone          en  variants    88    88      0/1144         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone          en  invalid    153     0         0/0         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone          ru  base         4     4        1/31         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone          ru  each       329   329    247/3981         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone          ru  pairs      236   236    291/2439         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone          ru  variants    88    88     36/1144         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone          ru  invalid    153     0         0/0         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone-min      et  base         4     4        0/31         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone-min      et  each       329   329     37/3981         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone-min      et  pairs      236   236    189/2439         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone-min      et  variants    88    88      0/1144         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone-min      et  invalid    153     0         0/0         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone-min      en  base         4     4        0/31         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone-min      en  each       329   329     38/3981         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone-min      en  pairs      236   236    234/2439         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone-min      en  variants    88    88      0/1144         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone-min      en  invalid    153     0         0/0         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone-min      ru  base         4     4        1/31         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone-min      ru  each       329   329    247/3981         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone-min      ru  pairs      236   236    295/2439         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone-min      ru  variants    88    88     36/1144         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+phone-min      ru  invalid    153     0         0/0         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+tablet-min     et  base         4     4        0/30         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+tablet-min     et  each       329   329     46/3791         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+tablet-min     et  pairs      236   236    207/2335         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+tablet-min     et  variants    88    88     16/1080         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+tablet-min     et  invalid    153     0         0/0         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+tablet-min     en  base         4     4        1/30         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+tablet-min     en  each       329   329    220/3791         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+tablet-min     en  pairs      236   236    269/2335         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+tablet-min     en  variants    88    88     32/1080         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+tablet-min     en  invalid    153     0         0/0         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+tablet-min     ru  base         4     4        1/30         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+tablet-min     ru  each       329   329    247/3791         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+tablet-min     ru  pairs      236   236    283/2335         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+tablet-min     ru  variants    88    88     58/1080         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+tablet-min     ru  invalid    153     0         0/0         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+desktop        et  base         4     4        0/30         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+desktop        et  each       329   329     46/3791         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+desktop        et  pairs      236   236    209/2335         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+desktop        et  variants    88    88     16/1080         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+desktop        et  invalid    153     0         0/0         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+desktop        en  base         4     4        1/30         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+desktop        en  each       329   329    220/3791         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+desktop        en  pairs      236   236    270/2335         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+desktop        en  variants    88    88     32/1080         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+desktop        en  invalid    153     0         0/0         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+desktop        ru  base         4     4        1/30         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+desktop        ru  each       329   329    247/3791         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+desktop        ru  pairs      236   236    284/2335         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+desktop        ru  variants    88    88     58/1080         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+desktop        ru  invalid    153     0         0/0         ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·        ·
+
+same ticket on screens of the same class: 1971 compared, 82 fitted differently at some zoom (4.2 %)
+  phone et screening.each.91: phone  vs  phone-min
+  phone et screening.each.94: phone  vs  phone-min
+  phone et screening.pairs.8: phone  vs  phone-min
+  phone et screening.pairs.12: phone  vs  phone-min
+  phone et screening.pairs.13: phone  vs  phone-min
+
+no problems

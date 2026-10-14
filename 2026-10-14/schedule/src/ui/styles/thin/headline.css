@@ -1,0 +1,68 @@
+/* THIN HEADLINE template (ui/templates/thin/HeadlineTicket.tsx) — tokens: thin.headline */
+
+.hl-body {
+  flex: 1 1 0;
+  min-height: 0;
+  padding: var(--t-thin-headline-bodyPadTop) 0 var(--t-thin-headline-bodyPadBottom);
+}
+.hl-row {
+  display: grid;
+  /* equal side columns keep a short title centred; a long one may use the right side, never the paw's */
+  grid-template-columns: minmax(var(--t-thin-headline-pawColMin), 1fr) minmax(0, auto) minmax(var(--t-thin-headline-mapColMin), 1fr);
+  align-items: end;
+  /* starts right under the two time rows; tall enough that the paw never climbs into them */
+  min-height: var(--t-thin-headline-rowMinH);
+  margin-top: var(--t-thin-headline-rowMarginTop);
+}
+.hl-row__paw {
+  position: relative;
+  align-self: stretch;
+}
+/* no wolf print by day: the title may use the paw's column too */
+.tk--headline:not(.has-paw) .hl-row {
+  grid-template-columns: minmax(var(--t-thin-headline-mapColMin), 1fr) minmax(0, auto) minmax(var(--t-thin-headline-mapColMin), 1fr);
+}
+.hl-row__paw img {
+  position: absolute;
+  left: var(--t-thin-headline-pawLeft);
+  bottom: var(--t-thin-headline-pawBottom);
+  width: var(--t-thin-headline-pawW);
+  height: auto;
+}
+.hl-title {
+  position: relative;
+  min-width: 0;
+  /* clears the weekday line when a long venue name wraps upwards */
+  padding-top: var(--t-thin-headline-titlePadTop);
+  font-weight: 700;
+  text-align: center;
+  text-wrap: balance;
+}
+.hl-title__button {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+.hl-title__text {
+  position: relative;
+  left: var(--t-thin-headline-titleNudge);
+  text-decoration: underline;
+  text-decoration-thickness: var(--t-thin-headline-underThick);
+  text-underline-offset: var(--t-thin-headline-underOffset);
+  text-decoration-skip-ink: none;
+}
+.hl-title__map {
+  position: absolute;
+  left: calc(100% + var(--t-thin-headline-mapLeft));
+  top: var(--t-thin-headline-mapTop);
+  width: var(--t-thin-headline-mapW);
+  height: var(--t-thin-headline-mapH);
+  pointer-events: none;
+}
+/* a title that wraps grows upwards into the weekday line's height: the icon moves
+   beside the last line instead (the map column keeps it clear of the notch) */
+.hl-title:has(.fit[data-used]:not([data-used='1'])) .hl-title__map {
+  top: auto;
+  bottom: var(--t-thin-headline-mapBottomWrapped);
+  left: calc(100% + var(--t-thin-headline-mapLeftWrapped));
+}

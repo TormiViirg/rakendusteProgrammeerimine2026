@@ -1,0 +1,20 @@
+/* THIN ROLE template (tickets/role/view/Thin.tsx) — tokens: thin.role */
+
+.role-body {
+  flex: 1 1 0;
+  min-height: 0;
+  padding: var(--t-thin-role-bodyPadTop) 0 var(--t-thin-role-bodyPadBottom);
+}
+.role-title {
+  margin-top: var(--t-thin-role-titleMarginTop);
+  padding: 0 var(--t-thin-role-titlePadX);
+  text-align: center;
+  font-weight: 600;
+  text-wrap: balance;
+}
+.role-title__under {
+  display: inline-block;
+  max-width: 100%;
+  padding: 0 var(--t-thin-role-underPadX) var(--t-thin-role-underPadBottom);
+  border-bottom: var(--t-thin-role-underRule) solid var(--t-color-rule);
+}

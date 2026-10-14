@@ -1,0 +1,72 @@
+/* Demo shell only — not part of the component library. */
+
+html,
+body {
+  margin: 0;
+  background: oklch(1 0 0);
+}
+
+.demo__stage {
+  max-width: 100%;
+  margin: 0 auto;
+  padding-bottom: 150px; /* room to scroll past the options panel */
+}
+/* a simulated screen wider than the window scrolls sideways inside its own box */
+.demo__stage[data-simulated='true'] {
+  max-width: none;
+  outline: 1px dashed oklch(0.8359 0 0);
+}
+.demo:has(.demo__stage[data-simulated='true']) {
+  overflow-x: auto;
+}
+.demo__panel {
+  position: fixed;
+  left: 50%;
+  bottom: max(8px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  width: max-content;
+  max-width: calc(100vw - 16px);
+  padding: 6px;
+  background: oklch(0.1913 0 0 / 0.92);
+  border-radius: 12px;
+  font: 500 12px/1 system-ui, sans-serif;
+}
+.demo__readout {
+  flex-basis: 100%;
+  margin: 0;
+  padding: 2px 4px 0;
+  text-align: center;
+  color: oklch(0.7858 0 0);
+  font-weight: 400;
+}
+.demo__readout b {
+  color: oklch(1 0 0);
+  font-weight: 600;
+}
+.seg {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 7px;
+  overflow: hidden;
+  background: oklch(0.3485 0 0);
+}
+.seg button {
+  all: unset;
+  cursor: pointer;
+  padding: 8px 9px;
+  color: oklch(0.8576 0 0);
+  white-space: nowrap;
+}
+.seg button[aria-pressed='true'] {
+  background: oklch(1 0 0);
+  color: oklch(0 0 0);
+}
+.seg button:focus-visible {
+  outline: 2px solid oklch(0.7669 0.1218 253.35);
+  outline-offset: -2px;
+}

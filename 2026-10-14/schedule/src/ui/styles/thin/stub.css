@@ -1,0 +1,216 @@
+/* Thin tickets: the stub — coloured strip and footer row. Heights are fixed: content adapts to them, never the other way round. */
+
+.strip {
+  display: flex;
+  align-items: stretch;
+  margin-right: var(--t-thin-strip-stubInset);
+  background: var(--tone);
+  color: var(--t-color-paper);
+  --icon-hole: var(--tone);
+  overflow: hidden;
+}
+/* strip heights are fixed: content adapts to them, never the other way round */
+.strip--tall {
+  height: var(--t-thin-strip-tallH);
+}
+.barcode {
+  display: block;
+  overflow: hidden;
+  background: var(--t-color-paper);
+  min-width: 0;
+}
+.barcode svg {
+  display: block;
+  height: 100%;
+  fill: var(--tone);
+}
+.strip__code--grow {
+  flex: 1 1 0;
+}
+.strip__block + .strip__code svg {
+  margin-left: var(--t-thin-strip-sepGap);
+}
+.tk--role .strip__code--grow {
+  border-right: var(--t-thin-strip-sepGap) solid var(--t-color-paper);
+}
+.strip__code--gap {
+  flex: 0 0 var(--t-thin-strip-codeGap);
+}
+.strip__code--mid {
+  flex: 0 0 var(--t-thin-strip-codeMid);
+}
+.strip__code--end {
+  flex: 0 0 var(--t-thin-strip-codeEnd);
+}
+.strip__code--lead {
+  flex: 0 0 var(--t-thin-strip-codeLead);
+}
+.strip__block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: var(--t-thin-strip-blockPadY) var(--t-thin-strip-venuePadR) var(--t-thin-strip-blockPadY) var(--t-thin-strip-venuePadL);
+  font-size: var(--t-thin-strip-blockFs);
+  line-height: var(--t-thin-strip-blockLh);
+  text-align: center;
+  text-decoration: none;
+}
+.strip__block--venue {
+  flex: 0 1 auto;
+}
+.strip__block--hall {
+  /* the hall keeps its width (up to hallMaxW); the venue name gives way first */
+  flex: 0 0 auto;
+  max-width: var(--t-thin-strip-hallMaxW);
+  padding-left: var(--t-thin-strip-hallPadL);
+  padding-right: var(--t-thin-strip-hallPadR);
+  font-weight: 600;
+}
+.strip__block--icon {
+  flex: 0 0 var(--t-thin-strip-iconW);
+  padding: 0;
+}
+.strip__map {
+  width: var(--t-thin-strip-mapW);
+  height: var(--t-thin-strip-mapH);
+}
+
+.foot {
+  height: var(--t-thin-foot-h);
+  overflow: hidden;
+  font-size: var(--t-thin-foot-fs);
+  line-height: var(--t-thin-foot-lh);
+  color: var(--t-color-dark);
+}
+.measure {
+  white-space: nowrap;
+}
+/* numerals keep their size relative to the surrounding (possibly shrunk) text */
+.measure .mono {
+  font-size: calc(1em * var(--t-thin-foot-numRatio));
+  letter-spacing: var(--t-thin-foot-numTrack);
+}
+.foot__code {
+  letter-spacing: var(--t-thin-foot-numTrack);
+}
+.measure__unit::before {
+  content: '\00a0';
+  font-family: var(--t-font-text);
+}
+.foot--role {
+  display: flex;
+  align-items: baseline;
+  gap: var(--t-thin-foot-scrGap);
+  padding: var(--t-thin-foot-rolePadTop) var(--t-thin-foot-rolePadRight) var(--t-thin-foot-rolePadBottom) var(--t-thin-foot-rolePadLeft);
+}
+.foot--headline {
+  padding: var(--t-thin-foot-headlinePadTop) var(--t-thin-foot-headlinePadX) var(--t-thin-foot-headlinePadBottom);
+  text-align: center;
+  color: var(--t-color-gray);
+  text-wrap: balance;
+}
+
+/* screening: runtime | time between screenings */
+
+.strip--info {
+  display: grid;
+  grid-template-columns:
+    var(--t-thin-strip-codeLead) calc((100% + var(--t-thin-strip-stubInset)) / 2 - var(--t-thin-strip-codeLead))
+    minmax(0, 1fr);
+  height: var(--t-thin-strip-infoH);
+}
+.strip__cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--t-thin-strip-cellGap);
+  min-width: 0;
+  font-size: var(--t-thin-strip-cellFs);
+  line-height: var(--t-thin-strip-cellLh);
+}
+.strip__cell--a {
+  padding: var(--t-thin-strip-aPadTop) var(--t-thin-strip-aPadRight) var(--t-thin-strip-aPadBottom) var(--t-thin-strip-aPadLeft);
+}
+.strip__cell--b {
+  position: relative;
+  padding: var(--t-thin-strip-bPadY) var(--t-thin-strip-bPadRight) var(--t-thin-strip-bPadY) var(--t-thin-strip-bPadLeft);
+}
+.strip__cell--b::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: var(--t-thin-strip-sepInset);
+  bottom: var(--t-thin-strip-sepInset);
+  width: var(--t-thin-strip-sepW);
+  background: var(--t-color-paper);
+}
+.strip__label {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+/* takes the room up to the value, so there is no dead gap between the two */
+.strip__label--small {
+  flex: 1 1 var(--t-thin-strip-smallBasis);
+}
+.strip__value {
+  flex: none;
+  margin-left: auto;
+}
+.strip__value .measure__unit {
+  margin-left: var(--t-thin-strip-unitGap);
+}
+.strip__cell--b .strip__value {
+  position: relative;
+  top: var(--t-thin-strip-bValueDrop);
+}
+
+.foot--screening {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  padding: var(--t-thin-foot-scrPadTop) 0 var(--t-thin-foot-scrPadBottom);
+}
+.foot__half {
+  display: flex;
+  align-items: baseline;
+  min-width: 0;
+}
+.foot__half--a {
+  padding-left: var(--t-thin-foot-scrAPadLeft);
+  gap: var(--t-thin-foot-scrGap);
+}
+.foot__half--a .foot__item:first-child {
+  min-width: var(--t-thin-foot-scrFirstMinW);
+}
+.foot__item {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+.foot__address {
+  flex: 1 1 0;
+  min-width: 0;
+  color: var(--t-color-gray);
+  font-family: 'Fira Sans Condensed', var(--t-font-text);
+}
+.foot--role .foot__address {
+  text-align: right;
+}
+.foot--role .foot__address:only-child {
+  text-align: center;
+}
+.foot__code-label {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+.foot__code {
+  flex: 0 1 auto;
+  min-width: 0;
+  margin-left: auto;
+  text-align: right;
+}
+.foot__half--b {
+  justify-content: space-between;
+  gap: var(--t-thin-foot-scrGap);
+  padding: 0 var(--t-thin-foot-scrBPadRight) 0 var(--t-thin-foot-scrBPadLeft);
+  color: var(--t-color-ink);
+}

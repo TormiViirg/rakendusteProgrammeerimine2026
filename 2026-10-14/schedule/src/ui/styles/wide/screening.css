@@ -1,0 +1,156 @@
+/* WIDE SCREENING template (tickets/screening/view/Wide.tsx) — tokens: wide.screening */
+
+.w-body {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--t-wide-screening-bodyPadTop) 0 var(--t-wide-screening-bodyPadBottom);
+}
+.w-body > * {
+  flex: none;
+}
+.w-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--t-wide-screening-rightColW);
+  min-height: var(--t-wide-screening-topMinH);
+}
+.w-left {
+  min-width: 0;
+}
+
+/* "Film:" caption right-aligned in its column, title + programme in the next */
+.w-film,
+.w-subs {
+  display: grid;
+  column-gap: calc(var(--t-wide-screening-contentX) - var(--t-wide-screening-labelRight));
+  align-items: baseline;
+}
+.w-film {
+  grid-template-columns: calc(var(--t-wide-screening-labelRight) - var(--ws)) minmax(0, var(--t-wide-screening-contentW));
+  margin-top: var(--t-wide-screening-filmMarginTop);
+}
+.wk--night .w-film {
+  margin-top: calc(var(--t-wide-screening-filmMarginTop) + var(--t-wide-screening-filmNightShift));
+}
+.w-film__label,
+.w-subs__label {
+  grid-column: 1;
+  text-align: right;
+}
+.w-film__title {
+  grid-column: 2;
+  display: flex;
+  align-items: flex-end;
+  /* the rule keeps its place when a long title is set smaller */
+  min-height: calc(var(--t-wide-screening-filmLh) + var(--t-wide-screening-filmPadBottom) + var(--t-wide-screening-ruleH));
+  padding-bottom: var(--t-wide-screening-filmPadBottom);
+  border-bottom: var(--t-wide-screening-ruleH) solid var(--t-wide-screening-ruleColor);
+  font-weight: 400;
+}
+.w-film__title .fit {
+  width: 100%;
+  text-align: center;
+}
+.w-film__programme {
+  grid-column: 2;
+  margin-top: var(--t-wide-screening-progMarginTop);
+  color: var(--t-color-gray);
+  text-align: center;
+}
+/* a programme line that wraps is set left-aligned */
+.w-film__programme:not([data-used='1']) {
+  text-align: left;
+}
+.w-subs {
+  grid-template-columns: calc(var(--t-wide-screening-labelRight) - var(--ws)) minmax(0, 1fr);
+  padding-right: var(--t-wide-screening-subsPadRight);
+}
+
+.w-right {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 0 var(--t-wide-screening-rightPadX);
+  text-align: center;
+}
+.w-right > * {
+  flex: none;
+}
+/* room for the age badge; closes up to rightPadTopMin when the cinema name takes two rows */
+.w-right > .w-right__top {
+  flex: 0 1 var(--t-wide-screening-rightPadTop);
+  min-height: var(--t-wide-screening-rightPadTopMin);
+}
+/* the line keeps its height when a long name is set smaller, so the rows below stay put */
+.w-right__venue {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: var(--t-wide-screening-venueLh);
+}
+.w-right__venue-wrap {
+  position: relative;
+  display: block;
+  max-width: calc(100% - 2 * var(--t-wide-screening-venueInset));
+}
+.w-right__hall {
+  margin-top: var(--t-wide-screening-hallMarginTop);
+  font-weight: 600;
+}
+.w-right__hall.is-light {
+  font-weight: 400;
+}
+.w-right__role {
+  margin-top: var(--t-wide-screening-roleMarginTop);
+  padding: 0 var(--t-wide-screening-rolePadX);
+  color: var(--tone);
+}
+
+.w-rating {
+  position: absolute;
+  top: var(--t-wide-screening-ratingTop);
+  right: var(--t-wide-screening-ratingRight);
+  width: var(--t-wide-screening-ratingBox);
+  height: var(--t-wide-screening-ratingBox);
+}
+.w-rating::before {
+  content: '';
+  position: absolute;
+  inset: var(--t-wide-screening-ratingInset);
+  transform: rotate(45deg);
+  background: var(--t-color-paper);
+  border: var(--t-wide-screening-ratingStroke) solid var(--tone);
+}
+.sc .w-rating__text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: var(--t-wide-screening-ratingFs);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--tone);
+}
+.w-help {
+  position: absolute;
+  cursor: pointer;
+  left: calc(100% + var(--t-wide-screening-helpLeft));
+  top: calc(-1 * var(--t-wide-screening-helpRise));
+  width: var(--t-wide-screening-helpSize);
+  height: var(--t-wide-screening-helpSize);
+}
+.w-help svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.w-paw {
+  position: absolute;
+  left: var(--t-wide-screening-pawLeft);
+  top: var(--t-wide-screening-pawTop);
+  width: var(--t-wide-screening-pawW);
+  height: auto;
+  pointer-events: none;
+}

@@ -1,0 +1,51 @@
+/* WIDE ROLE template (tickets/role/view/Wide.tsx) — tokens: wide.role */
+
+.r-body {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--t-wide-role-bodyPadTop) 0 var(--t-wide-role-bodyPadBottom);
+}
+.r-body > * {
+  flex: none;
+}
+/* four columns: the role takes the left two, the location the right two */
+.r-body > .r-row {
+  flex: 1 1 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--t-wide-role-colGap);
+  align-items: center;
+  margin-top: var(--t-wide-role-rowMarginTop);
+  padding: 0 var(--t-wide-role-padX);
+  text-align: center;
+}
+.r-role {
+  grid-column: 1 / span 2;
+  min-width: 0;
+  font-weight: 600;
+  color: var(--tone);
+}
+.r-place {
+  grid-column: 3 / span 2;
+  min-width: 0;
+}
+.r-place__venue {
+  position: relative;
+  display: inline-block;
+  max-width: calc(100% - 2 * (var(--t-wide-role-mapW) + var(--t-wide-role-mapGap)));
+  cursor: pointer;
+}
+.r-place__map {
+  position: absolute;
+  left: calc(100% + var(--t-wide-role-mapGap));
+  top: calc((var(--t-wide-role-venueLh) - var(--t-wide-role-mapH)) / 2);
+  width: var(--t-wide-role-mapW);
+  height: var(--t-wide-role-mapH);
+}
+.r-place__hall {
+  margin-top: var(--t-wide-role-hallMarginTop);
+  font-weight: 600;
+}

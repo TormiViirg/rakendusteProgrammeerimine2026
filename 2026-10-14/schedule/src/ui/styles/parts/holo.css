@@ -1,0 +1,21 @@
+/* Holographic band at the top of a ticket. */
+
+.holo {
+  background-color: var(--t-color-holoFallback);
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: cover;
+}
+.holo--band {
+  height: var(--t-thin-holo-band);
+  background-image: url('../../assets/holo-band.png');
+}
+.holo--strip {
+  height: var(--t-thin-holo-strip);
+  background-image: url('../../assets/holo-strip.png');
+}
+.holo--wide {
+  height: var(--t-wide-holo-band);
+  background-image: url('../../assets/holo-wide.png');
+  background-size: 100% 100%;
+}

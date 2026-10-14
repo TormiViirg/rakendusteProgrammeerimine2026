@@ -1,0 +1,190 @@
+/*
+ * The times block (ui/parts/Times.tsx). Each template maps its own tokens onto
+ * --times-*:  .times--thin-role → thin.role.times,  .times--wide-headline → wide.headline.times …
+ */
+
+.times {
+  display: grid;
+  grid-template-columns: minmax(0, max-content) max-content;
+  justify-content: space-between;
+  align-items: start;
+  margin: 0 var(--times-marginR) 0 var(--times-marginL);
+}
+.times__label,
+.times__value {
+  font-size: var(--times-fs);
+  line-height: var(--times-lh);
+}
+.times__label {
+  min-width: 0;
+  padding-right: var(--times-gap);
+}
+.times__value {
+  white-space: nowrap;
+}
+.times__value.mono,
+.range__time {
+  font-weight: 500;
+}
+.range {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: top;
+}
+.range__time {
+  white-space: pre;
+}
+/* Weekday line: centred under the range, never widens the time column. */
+.range__days {
+  display: flex;
+  justify-content: center;
+  gap: var(--times-dayGap);
+  width: 0;
+  white-space: nowrap;
+  font-family: var(--t-font-text);
+  color: var(--t-color-gray);
+  font-size: var(--times-dayFs);
+  line-height: var(--times-dayLh);
+  margin-top: var(--times-dayShift);
+  transform: translateX(var(--times-dayNudge));
+}
+.times--thin-role {
+  --times-fs: var(--t-thin-role-times-fs);
+  --times-lh: var(--t-thin-role-times-lh);
+  --times-gap: var(--t-thin-role-times-gap);
+  --times-dayFs: var(--t-thin-role-times-dayFs);
+  --times-dayLh: var(--t-thin-role-times-dayLh);
+  --times-dayShift: var(--t-thin-role-times-dayShift);
+  --times-dayNudge: var(--t-thin-role-times-dayNudge);
+  --times-dayGap: var(--t-thin-role-times-dayGap);
+  --times-marginL: var(--t-thin-role-times-marginL);
+  --times-marginR: var(--t-thin-role-times-marginR);
+}
+.times--thin-headline {
+  --times-fs: var(--t-thin-headline-times-fs);
+  --times-lh: var(--t-thin-headline-times-lh);
+  --times-gap: var(--t-thin-headline-times-gap);
+  --times-dayFs: var(--t-thin-headline-times-dayFs);
+  --times-dayLh: var(--t-thin-headline-times-dayLh);
+  --times-dayShift: var(--t-thin-headline-times-dayShift);
+  --times-dayNudge: var(--t-thin-headline-times-dayNudge);
+  --times-dayGap: var(--t-thin-headline-times-dayGap);
+  --times-marginL: var(--t-thin-headline-times-marginL);
+  --times-marginR: var(--t-thin-headline-times-marginR);
+}
+.times--thin-screening {
+  --times-fs: var(--t-thin-screening-times-fs);
+  --times-lh: var(--t-thin-screening-times-lh);
+  --times-gap: var(--t-thin-screening-times-gap);
+  --times-dayFs: var(--t-thin-screening-times-dayFs);
+  --times-dayLh: var(--t-thin-screening-times-dayLh);
+  --times-dayShift: var(--t-thin-screening-times-dayShift);
+  --times-dayNudge: var(--t-thin-screening-times-dayNudge);
+  --times-dayGap: var(--t-thin-screening-times-dayGap);
+  --times-marginL: var(--t-thin-screening-times-marginL);
+  --times-marginR: var(--t-thin-screening-times-marginR);
+  justify-content: start;
+}
+.times--thin-headline .times__label {
+  text-align: center;
+}
+/* the weekday line hangs below the block without pushing the paw/title row down */
+.times--thin-headline .range__days {
+  height: 0;
+}
+.times--thin-screening {
+  min-height: var(--t-thin-screening-timesMinH);
+  align-content: start;
+}
+.has-rating .times--thin-screening {
+  margin-right: var(--t-thin-screening-ratingClearance);
+}
+
+/* ───────────── wide tickets ───────────── */
+
+.times--wide-screening,
+.times--wide-role,
+.times--wide-headline {
+  --times-gap: 0px;
+  --times-dayNudge: 0px;
+  --times-marginR: 0px;
+  justify-content: start;
+}
+.times--wide-screening {
+  --times-fs: var(--t-wide-screening-times-fs);
+  --times-lh: var(--t-wide-screening-times-lh);
+  --times-dayFs: var(--t-wide-screening-times-dayFs);
+  --times-dayLh: var(--t-wide-screening-times-dayLh);
+  --times-dayShift: var(--t-wide-screening-times-dayShift);
+  --times-dayGap: var(--t-wide-screening-times-dayGap);
+  --times-marginL: calc(var(--t-wide-screening-times-labelX) - var(--ws));
+  --times-valueFs: var(--t-wide-screening-times-valueFs);
+  --times-endFs: var(--t-wide-screening-times-endFs);
+  --times-dashFs: var(--t-wide-screening-times-dashFs);
+  --times-dashMargin: var(--t-wide-screening-times-dashMargin);
+  --times-startStretch: var(--t-wide-screening-times-startStretch);
+  grid-template-columns: calc(var(--t-wide-screening-times-valueX) - var(--t-wide-screening-times-labelX)) max-content;
+}
+.times--wide-role {
+  --times-fs: var(--t-wide-role-times-fs);
+  --times-lh: var(--t-wide-role-times-lh);
+  --times-dayFs: var(--t-wide-role-times-dayFs);
+  --times-dayLh: var(--t-wide-role-times-dayLh);
+  --times-dayShift: var(--t-wide-role-times-dayShift);
+  --times-dayGap: var(--t-wide-role-times-dayGap);
+  --times-marginL: calc(var(--t-wide-role-times-labelX) - var(--ws));
+  --times-valueFs: var(--t-wide-role-times-valueFs);
+  --times-endFs: var(--t-wide-role-times-endFs);
+  --times-dashFs: var(--t-wide-role-times-dashFs);
+  --times-dashMargin: var(--t-wide-role-times-dashMargin);
+  --times-startStretch: var(--t-wide-role-times-startStretch);
+  grid-template-columns: calc(var(--t-wide-role-times-valueX) - var(--t-wide-role-times-labelX)) max-content;
+}
+.times--wide-headline {
+  --times-fs: var(--t-wide-headline-times-fs);
+  --times-lh: var(--t-wide-headline-times-lh);
+  --times-dayFs: var(--t-wide-headline-times-dayFs);
+  --times-dayLh: var(--t-wide-headline-times-dayLh);
+  --times-dayShift: var(--t-wide-headline-times-dayShift);
+  --times-dayGap: var(--t-wide-headline-times-dayGap);
+  --times-marginL: calc(var(--t-wide-headline-times-labelX) - var(--ws));
+  --times-valueFs: var(--t-wide-headline-times-valueFs);
+  grid-template-columns: calc(var(--t-wide-headline-times-valueX) - var(--t-wide-headline-times-labelX)) max-content;
+}
+.times--wide-screening .times__value,
+.times--wide-role .times__value,
+.times--wide-headline .times__value {
+  font-size: var(--times-valueFs);
+}
+/* the weekday line hangs below the range without moving what follows */
+.times--wide-screening .range__days,
+.times--wide-role .range__days,
+.times--wide-headline .range__days {
+  height: 0;
+  margin-top: 0;
+  transform: translateY(var(--times-dayShift));
+}
+.sc .times--wide-screening .range__time,
+.sc .times--wide-role .range__time,
+.sc .times--wide-headline .range__time {
+  font-weight: 500;
+}
+/* compact block (screening, role): the end time is set smaller, with a small hyphen */
+.times--wide-screening .range__end,
+.times--wide-role .range__end {
+  font-size: var(--times-endFs);
+}
+.times--wide-screening .range__dash,
+.times--wide-role .range__dash {
+  margin: 0 var(--times-dashMargin);
+  font-size: var(--times-dashFs);
+}
+/* ratio mode B: the start time is stretched like in the mockup; 5 mono glyphs = 3em wide */
+.times--wide-screening .range__start,
+.times--wide-role .range__start {
+  display: inline-block;
+  transform: scaleX(var(--times-startStretch));
+  transform-origin: left center;
+  margin-right: calc((var(--times-startStretch) - 1) * 3em);
+}

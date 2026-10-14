@@ -1,0 +1,176 @@
+/* Page chrome: sticky top block, day headings, the grid the tickets sit in. */
+
+.page {
+  width: var(--page-w, 100%);
+  max-width: 100%;
+  margin: 0 auto;
+  padding-bottom: var(--t-page-bottomPad);
+}
+.page[data-loading='true'] .day {
+  opacity: 0.55;
+}
+.top {
+  position: sticky;
+  top: var(--sticky-offset);
+  z-index: 30;
+  height: var(--t-page-topBlock);
+  background: var(--t-color-paper);
+}
+.top__menu {
+  height: var(--t-page-menuH);
+  margin: 0 var(--t-page-gutter);
+  border-bottom: var(--t-page-menuRule) solid var(--t-color-rule);
+}
+.top__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--t-page-titleGap);
+  padding: var(--t-page-titlePadTop) calc(var(--t-page-gutter) + var(--t-page-titleInsetRight)) 0
+    calc(var(--t-page-gutter) + var(--t-page-titleIndent));
+}
+.top__title h1 {
+  font-weight: 600;
+  font-size: var(--t-page-titleFs);
+  line-height: var(--t-page-titleLh);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.langs {
+  display: flex;
+  gap: var(--t-page-langGap);
+  transform: translateY(calc(-1 * var(--t-page-langRise)));
+}
+.langs button {
+  all: unset;
+  cursor: pointer;
+  font-family: var(--t-font-text);
+  font-weight: 600;
+  font-size: var(--t-page-langFs);
+  line-height: var(--t-page-titleLh);
+  color: var(--t-color-mute);
+}
+.langs button:focus-visible,
+.sc a:focus-visible {
+  outline: var(--t-page-focusRing) solid var(--t-color-ink);
+  outline-offset: var(--t-page-focusRing);
+}
+.page__status {
+  padding: var(--t-page-cardGap) calc(var(--t-page-gutter) + var(--t-page-titleIndent));
+  font-size: var(--t-page-titleFs);
+  color: var(--t-color-gray);
+}
+
+.day + .day {
+  margin-top: var(--t-page-dayGap);
+}
+.day__sentinel {
+  height: 0;
+}
+.day__header {
+  position: sticky;
+  top: calc(var(--sticky-offset) + var(--t-page-topBlock));
+  z-index: 20;
+  height: var(--t-page-dayH);
+  padding: 0 var(--t-page-gutter) 0 calc(var(--t-page-gutter) + var(--t-page-dayIndent));
+  background: var(--t-color-paper);
+  font-size: var(--t-page-dayFs);
+  line-height: var(--t-page-dayLh);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.day__header .mono {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+.day__header::before,
+.day__header::after {
+  content: '';
+  position: absolute;
+  left: var(--t-page-gutter);
+  right: var(--t-page-gutter);
+  background: var(--t-color-rule);
+}
+/* thin rule under the date (general schedule) */
+.day__header--rule::before {
+  top: var(--t-page-dayRuleTop);
+  height: var(--t-page-dayRuleH);
+  background: var(--t-page-dayRuleColor);
+}
+/* heavier rule while pinned: cards slide underneath it */
+.day__header[data-stuck='true'] {
+  overflow: visible;
+}
+.day__header[data-stuck='true']::after {
+  top: var(--t-page-stuckRuleTop);
+  height: var(--t-page-stuckRuleH);
+}
+.day__list {
+  display: grid;
+  grid-template-columns: repeat(var(--columns, 1), minmax(0, 1fr));
+  align-items: start;
+  gap: var(--t-page-cardGap);
+  padding: 0 var(--t-page-gutter);
+}
+
+/* a line above a ticket: what a test case is for */
+.tk-cell {
+  min-width: 0;
+}
+.tk-note {
+  margin: 0 0 var(--t-page-noteGap);
+  font-family: 'Fira Sans Condensed', var(--t-font-text);
+  font-size: var(--t-page-noteFs);
+  line-height: var(--t-page-noteLh);
+  color: var(--t-color-gray);
+  overflow-wrap: anywhere;
+}
+
+/* ───────────── page chrome with wide tickets ───────────── */
+
+/* no "Minu vahetused" row: the language switch sits in the menu slot */
+.sc[data-layout='wide'] .top__title {
+  position: absolute;
+  right: var(--t-page-gutter);
+  bottom: calc(10 * var(--u));
+  padding: 0;
+}
+.sc[data-layout='wide'] .top__title h1 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.sc[data-layout='wide'] .langs {
+  transform: none;
+}
+.sc[data-layout='wide'] .langs button {
+  font-size: var(--t-wide-page-langFs);
+}
+/* large weekday + date, rule underneath */
+.sc[data-layout='wide'] .day__header {
+  display: flex;
+  align-items: baseline;
+  padding: var(--t-wide-page-dayPadTop) var(--t-page-gutter) 0 calc(var(--t-page-gutter) + var(--t-wide-page-weekdayIndent));
+  line-height: var(--t-wide-page-dayLh);
+}
+.sc[data-layout='wide'] .day__header[data-stuck='true']::after {
+  content: none;
+}
+.day__weekday {
+  flex: 0 1 auto;
+  min-width: calc(var(--t-wide-page-dateIndent) - var(--t-wide-page-weekdayIndent));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: var(--t-wide-page-weekdayFs);
+}
+.sc .day__header .day__date {
+  flex: none;
+  font-size: var(--t-wide-page-dateFs);
+  font-weight: 400;
+}

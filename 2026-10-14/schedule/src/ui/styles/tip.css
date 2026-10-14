@@ -1,0 +1,23 @@
+/* popover with the full text */
+.tip {
+  --tip-gap: var(--t-tip-gap);
+  position: fixed;
+  z-index: 60;
+  max-width: min(var(--t-tip-maxW), calc(100vw - 16px));
+  padding: var(--t-tip-padY) var(--t-tip-padX);
+  background: var(--t-color-paper);
+  border: var(--t-tip-stroke) solid var(--t-color-ink);
+  color: var(--t-color-ink);
+  font-size: var(--t-tip-fs);
+  line-height: var(--t-tip-lh);
+  overflow-wrap: break-word;
+  pointer-events: none;
+}
+.tip__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tip__list > li + li {
+  border-top: var(--t-tip-stroke) solid var(--t-color-rule);
+}

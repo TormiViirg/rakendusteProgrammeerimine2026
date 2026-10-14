@@ -1,0 +1,98 @@
+/*
+ * <Fit>: text that shrinks in steps before it is cut (core/fit/fitText.ts).
+ * While it is being measured a long word must overflow rather than break, so the
+ * component can see that it does not fit; once it has hit the minimum size the
+ * text is clamped to its line budget with an ellipsis.
+ */
+.fit {
+  position: relative;
+  display: block;
+  min-width: 0;
+  overflow-wrap: normal;
+  /* soft hyphens from the Hyphenator port mark the syllable ends; they are ignored … */
+  hyphens: none;
+}
+/* … until the text does not fit whole (<Fit> sets data-broken) */
+.fit[data-broken] {
+  hyphens: manual;
+}
+/* languages without rules there (English): the browser's hyphenation dictionary */
+.fit[data-broken][data-hyphens='auto'] {
+  hyphens: auto;
+}
+.fit[data-fit='clamp'] {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--fit-lines, 1);
+  line-clamp: var(--fit-lines, 1);
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  text-wrap: wrap;
+  /* the full text opens on hover, focus or tap (TruncationTip) */
+  cursor: help;
+}
+/* a cut line that ends in a syllable break gets "-" and "…": the browser only makes room
+   for the "…", so a little is kept free at the end of the lines */
+.fit[data-fit='clamp'][data-broken]:not([data-lines='1']) {
+  padding-inline-end: 0.45em;
+}
+/* one line: plain ellipsis — it measures the "…" itself, so it is never clipped */
+.fit[data-fit='clamp'][data-lines='1'] {
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-wrap: normal;
+}
+.fit[data-fit='clamp']:focus-visible {
+  outline: var(--t-page-focusRing) solid currentColor;
+  outline-offset: calc(-1 * var(--t-page-focusRing));
+}
+/*
+ * A cut LIST (subtitle languages, programmes): the "…" hides whole values, not
+ * the rest of a sentence. Three dots in the corner pulse one after another to
+ * draw the eye and show there is more to open.
+ */
+.fit__more {
+  display: none;
+}
+.fit[data-fit='clamp'] > .fit__more {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--t-tip-dotGap);
+  height: 1lh;
+  padding-left: calc(3 * var(--t-tip-dotGap));
+  background: linear-gradient(to right, transparent, var(--t-color-paper) calc(3 * var(--t-tip-dotGap)));
+}
+.fit__more > i {
+  width: var(--t-tip-dot);
+  height: var(--t-tip-dot);
+  background: currentColor;
+  animation: fit-more 1.4s steps(1, end) infinite;
+}
+.fit__more > i:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.fit__more > i:nth-child(3) {
+  animation-delay: 0.4s;
+}
+@keyframes fit-more {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: none;
+  }
+  15%,
+  45% {
+    opacity: 1;
+    transform: translateY(calc(-1 * var(--t-tip-dot)));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fit__more > i {
+    animation: none;
+  }
+}

@@ -1,0 +1,94 @@
+/* Design tokens. Colours are oklch() only – tests/architecture.test.ts enforces it. */
+:root {
+  --u: 1px; /* one design unit; set from app/layout.ts */
+
+  --ink: oklch(0 0 0);
+  --paper: oklch(1 0 0);
+  --row-alt: oklch(0.95 0 0);
+  --chosen: oklch(0.8 0 0);
+  --leader: oklch(0.5 0 0);
+  --bar: oklch(0.5 0 0);
+  --dock: oklch(0.89 0 0);
+  --track: oklch(0.78 0 0);
+  --rule: oklch(0.8 0 0);
+  --hint: oklch(0.66 0 0);
+  --muted: oklch(0.55 0 0);
+  --tip: oklch(0.965 0 0);
+  --tip-strip: oklch(0.9 0 0);
+  --veil: oklch(0.93 0 0);
+  --eye: oklch(0.68 0.17 240);
+  --focus: oklch(0.62 0.19 255);
+  /* a team lead's entries wear the team's colour; the volunteer's own wear the feedback accent */
+  --team: oklch(0.5 0 0);
+  --accent-neutral: oklch(0.5 0 0);
+  /* "pick more" is blue – never red or orange */
+  --accent-more: oklch(0.6 0.14 250);
+  --accent-good: oklch(0.6 0.16 150);
+  --accent: var(--accent-neutral);
+
+  --sans: 'Fira Sans Extra Condensed', 'Arial Narrow', sans-serif;
+  --mono: 'Fira Mono', ui-monospace, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-text-size-adjust: 100%;
+}
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+button {
+  cursor: pointer;
+  border: 0;
+  background: none;
+  padding: 0;
+}
+button:disabled {
+  cursor: default;
+}
+:focus-visible {
+  outline: calc(2 * var(--u)) solid var(--focus);
+  outline-offset: calc(1 * var(--u));
+}
+p,
+h1,
+h2 {
+  margin: 0;
+}
+.loading {
+  padding: 24px;
+  font-size: 18px;
+}
+
+/* Estonian and Russian get soft hyphens from the hyphenator; English relies on the browser dictionary. */
+:lang(en) {
+  hyphens: auto;
+}
+
+/* Running text that may take several rows is justified, with an indented first line. */
+.prose {
+  text-align: justify;
+  text-indent: 1.2em;
+  text-align-last: left;
+}
+.prose + .prose {
+  margin-top: 0.3em;
+}
+
+/* a component shrinks with its slot, but never below this share of its design size */
+:root {
+  --shrink-floor: 0.75;
+}

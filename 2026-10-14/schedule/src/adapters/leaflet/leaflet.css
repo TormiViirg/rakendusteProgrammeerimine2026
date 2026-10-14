@@ -1,0 +1,14 @@
+/* Leaflet's own chrome, brought into the tickets' black-and-white, square-cornered world. */
+
+/* tiles in grey */
+.place__leaflet .leaflet-tile-pane {
+  filter: grayscale(1) contrast(1.08);
+}
+.place__leaflet .leaflet-bar,
+.place__leaflet .leaflet-bar a {
+  border-radius: 0;
+}
+.place__leaflet .leaflet-bar {
+  border: var(--t-overlay-stroke) solid var(--t-color-ink);
+  box-shadow: none;
+}
